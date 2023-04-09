@@ -1,0 +1,33 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Plot List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Plot No</th>
+          <th>Has Sensor</th>
+          <th>Is Irrigated</th>
+          <th>Crop Type</th>
+          <th>Water Qty</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plot of plots | async">
+          <td>{{plot.no}}</td>
+          <td>{{plot.hasSensor}}</td>
+          <td>{{plot.isIrrigated}}</td>
+          <td>{{plot.cropType}}</td>
+          <td>{{plot.waterQty}}</td>
+          <td>
+              <button (click)="updatePlot(plot.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
+              <button (click)="plotDetails(plot.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

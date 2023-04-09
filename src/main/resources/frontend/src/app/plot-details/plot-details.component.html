@@ -1,0 +1,38 @@
+<h2>Plot Details</h2> 
+
+<hr/>
+<div *ngIf="plot">
+  <div>
+    <label><b>Plot ID: </b></label> {{plot.id}}
+  </div>
+  <div>
+    <label><b>Plot NO: </b></label> {{plot.no}}
+  </div>
+  <div>
+    <label><b>Has Sensor: </b></label> {{plot.hasSensor}}
+  </div>  
+  <div>
+    <label><b>Sensor Retry Count: </b></label> {{plot.retryCount}}
+  </div>
+  <div>
+    <label><b>Time Slot: </b></label> {{plot.timeSlot}}
+  </div>
+  <div>
+    <label><b>Is Irrigated: </b></label> {{plot.isIrrigated}}
+  </div>  
+  <div>
+    <label><b>Water Qty: </b></label> {{plot.waterQty}}
+  </div>
+  <div>
+    <label><b>Crop Type: </b></label> {{plot.cropType}}
+  </div>
+  <div>
+    <label><b>Cultivated Area: </b></label> {{plot.cultivatedArea}}
+  </div>  
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Plot List</button><br>
+
+
