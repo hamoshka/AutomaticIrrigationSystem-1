@@ -9,14 +9,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.irrigation.system.model.Plot;
 import com.irrigation.system.repository.PlotRepository;
-import com.irrigation.system.util.Constant;
 
 @Service
 public class IPlotServiceImpl implements IPlotService {
@@ -26,17 +22,18 @@ public class IPlotServiceImpl implements IPlotService {
     @Autowired
     private PlotRepository plotRepository;
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public Integer addPlot(Plot nP) {
         // Add the new plot.
         LOG.info("Adding the new plot.");
-    
-		/*
-		 * return plotRepository.update(Constant.SQL_ADD_PLOT, nP.getNo(),
-		 * nP.getHasSensor(), nP.getRetryCount(), nP.getTimeSlot(), nP.getIsIrrigated(),
-		 * nP.getWaterQty(), nP.getCropType(), nP.getCultivatedArea());
-		 */
-        return null;
+
+       Plot plot = Plot.builder().no(nP.getNo()).hasSensor(nP.getHasSensor()).retryCount(nP.getRetryCount()).
+        timeSlot(nP.getTimeSlot()).isIrrigated(nP.getIsIrrigated()).waterQty(nP.getWaterQty()).
+        cropType(nP.getCropType()).cultivatedArea(nP.getCultivatedArea()).build();
+        Plot savedPlot = plotRepository.save(nP);
+
+        return savedPlot.getId().intValue();
     }
 
     @Override
@@ -72,13 +69,10 @@ public class IPlotServiceImpl implements IPlotService {
     @Override
     public List<Plot> getPlots() {
         //Get all plot.
-		/*
-		 * List<Plot> gP = jdbcIrr.query( Constant.SQL_PLOT_LIST,
-		 * BeanPropertyRowMapper.newInstance(Plot.class)); LOG.info("Total plot: {}",
-		 * gP.size()); return gP.isEmpty() ? new ArrayList<>() : gP;
-		 */
-    
-    	return null;
+    	List<Plot> gP = plotRepository.findAll();
+    	LOG.info("Total plot: {}", gP.size());
+    	return gP.isEmpty() ? new ArrayList<>() : gP;
+
     }
 
 	@SuppressWarnings("deprecation")

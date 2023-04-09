@@ -8,14 +8,12 @@ public class Constant {
     public static final String SPLITTER_COMMA = ",";
     public static final String NEW_LINE = "\n";
 
-    public static final String SQL_ADD_PLOT = "INSERT INTO plot VALUES(plot_seq.NEXTVAL, ?, ?, ?, TO_DATE(?, 'YYYY-MM-DD HH24:MI'), ?, ?, ?, ?)";
     public static final String SQL_CONFIG_PLOT = "UPDATE plot SET has_sensor = ? WHERE no = ?";
     public static final String SQL_UPDATE_PLOT = "UPDATE plot SET no=? , has_sensor = ?, time_slot=TO_DATE(?, 'YYYY-MM-DD HH24:MI'), is_irrigated=?, water_quantity=?, crop_type=?, cultivated_area=? \n" +
             " WHERE id = ?";
     public static final String SQL_PLOT_SELECT = "SELECT id, no, has_sensor AS hasSensor, sensor_retry_count AS retryCount, \n" +
             " TO_CHAR(time_slot, 'YYYY-MM-DD HH24:MI') AS timeSlot, is_irrigated AS isIrrigated, water_quantity AS waterQty, \n" +
             " crop_type AS cropType, cultivated_area AS cultivatedArea ";
-    public static final String SQL_PLOT_LIST = SQL_PLOT_SELECT + " FROM plot";
     public static final String SQL_PLOT_AUTO_IRRIGATION = SQL_PLOT_SELECT + " FROM plot WHERE has_sensor = 'Y' AND is_irrigated = 'N' \n ";
     public static final String SQL_IS_IRRIGATED = "UPDATE plot SET \n" +
             " is_irrigated='Y' \n" +
