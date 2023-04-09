@@ -19,11 +19,11 @@ public interface PlotRepository extends JpaRepository<Plot, Long> {
 
 	
 	@Modifying
-	@Query("UPDATE Plot p SET p.retryCount = p.retryCount + 1 WHERE p.hasSensor = 'N' AND p.isIrrigated = 'N'")
+	@Query("UPDATE Plot p SET p.retryCount = p.retryCount + 1 WHERE p.hasSensor = 'NO' AND p.isIrrigated = 'NO'")
 	int updateSensorRetryCount();
 
 	@Modifying
-	@Query("UPDATE Plot p SET p.isIrrigated = 'true' WHERE p.id IN (:ids)")
+	@Query("UPDATE Plot p SET p.isIrrigated = 'YES' WHERE p.id IN (:ids)")
 	Integer updateIsIrrigated(@Param("ids") List<Long> ids);
 
     List<Plot> findByHasSensorAndIsIrrigated(String hasSensor, String isIrrigated);

@@ -23,7 +23,7 @@ public class IAutoAlertServiceImpl implements IAutoAlertService {
     @Override
     public List<Plot> checkPlotsForAutoAlerting(Integer retryMax) {
         //Call for filtering plots for automatic alerting for non sensor and retry exceed.
-    	List<Plot> alertP = plotRepository.findByHasSensorAndRetryCountGreaterThan("N", 1);
+    	List<Plot> alertP = plotRepository.findByHasSensorAndRetryCountGreaterThan("NO", 1);
     	LOG.info("Total plot to check for alert: {}", alertP.size());
 
     	List<Plot> aP = alertP.stream()

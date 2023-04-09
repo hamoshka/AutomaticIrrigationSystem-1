@@ -1,7 +1,7 @@
 alert:
   file: D://Report//alert-plot.csv
 cron:
-  expression: 0 0/30 * * * ?
+  expression: 0 0/1 * * * ?
 crop:
   types: food,cash,drug
 irrigation:
@@ -17,14 +17,14 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
     show-sql: true
-#   hibernate:
+#    hibernate:
 #      ddl-auto: create
   datasource:
     ucp:
       connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
     url: jdbc:oracle:thin:@localhost:1521/xe
     db_url: jdbc:oracle:thin:@localhost:1521/xe
-    username: system
+    username: EMKC0251
     password: system
    
     

@@ -9,11 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.irrigation.system.model.Plot;
 import com.irrigation.system.repository.PlotRepository;
 
 @Service
+@Transactional
 public class IAutoIrrigationServiceImpl implements IAutoIrrigationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(IAutoIrrigationServiceImpl.class);
@@ -24,7 +26,7 @@ public class IAutoIrrigationServiceImpl implements IAutoIrrigationService {
     @Override
     public List<Plot> checkPlotsForAutoIrrigation() {
         // Call for automatic irrigation on non-irrigated plots.
-    	 List<Plot> iP = plotRepository.findByHasSensorAndIsIrrigated("Y", "N");
+    	 List<Plot> iP = plotRepository.findByHasSensorAndIsIrrigated("YES", "NO");
     	    LOG.info("Total plots for auto irrigation: {}", iP.size());
     	    return iP.isEmpty() ? new ArrayList<>() : iP;
     }
