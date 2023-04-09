@@ -33,31 +33,34 @@ public class AutoIrrigationAlertScheduler {
     private Properties prop;
 
     @Scheduled(cron = "${cron.expression}")
-    public void checkAutoIrrigationAndAlert() {
-
-        //1. Call for Auto Irrigation.
-    	log.info("Checking plots for Automatic-Irrigation-Started.");
-        //1.1. Check the eligible plots
-        List<Plot> iP = autoIrrigationService.checkPlotsForAutoIrrigation();
-        if (!iP.isEmpty()) { // Generate irrigation csv file to send to sensor interface
+    public void checkAutoIrrigationAndAlert() {// 1. Call for Auto Irrigation.
+        log.info("Checking plots for Automatic-Irrigation-Started.");
+        
+        // 1.1. Check the eligible plots.
+        var iP = autoIrrigationService.checkPlotsForAutoIrrigation();
+        if (!iP.isEmpty()) {
+            // Generate irrigation csv file to send to sensor interface.
             helper.generateFile(iP, prop.getIrrFile(), Constant.FILE_SENSOR);
-            //1.2. Change the status to isIrrigated (Y)
-            String pIdS = iP.stream().map(p -> String.valueOf(p.getId())).collect(Collectors.joining(Constant.SPLITTER_COMMA));
-            Integer uI = autoIrrigationService.updateIsIrrigated(pIdS);
+            
+            // 1.2. Change the status to isIrrigated (Y).
+            var pIdS = iP.stream().map(p -> String.valueOf(p.getId())).collect(Collectors.joining(Constant.SPLITTER_COMMA));
+            var uI = autoIrrigationService.updateIsIrrigated(pIdS);
             log.info("Total plot to update the isIrrigated: {}", uI);
-
         }
-        //1.3. Update the retry count on non sensor
-        Integer uR = autoIrrigationService.updateRetryCount();
+        
+        // 1.3. Update the retry count on non-sensor.
+        var uR = autoIrrigationService.updateRetryCount();
         log.info("Total plot to update the retryCount: {}", uR);
-
+        
         log.info("Checking plots for Automatic-Irrigation-End.");
-
-        //2. Call for Alerting on non sensor and exceed the retry in plot.
+        
+        // 2. Call for Alerting on non-sensor and exceed the retry in plot.
         log.info("Checking plots for Automatic-Alerting-Started.");
-        List<Plot> aP = autoAlertService.checkPlotsForAutoAlerting(Integer.valueOf(prop.getRetryExceed()));
-        if (!aP.isEmpty()) // Generate alert csv file to send as attachment in mail(To be done)
+        var aP = autoAlertService.checkPlotsForAutoAlerting(Integer.valueOf(prop.getRetryExceed()));
+        if (!aP.isEmpty()) {
+            // Generate alert csv file to send as attachment in mail (To be done).
             helper.generateFile(aP, prop.getAlertFile(), Constant.FILE_ALERT);
-        log.info("Checking plots for Automatic-Alerting-End.");
-    }
+        }
+        
+        log.info("Checking plots for Automatic-Alerting-End.");}
 }

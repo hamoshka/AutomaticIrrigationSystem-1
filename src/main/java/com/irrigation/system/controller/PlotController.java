@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/plots")
+@RequestMapping("/api/plots")
 @Slf4j
 public class PlotController {
 
@@ -42,18 +42,19 @@ public class PlotController {
     @PostMapping(value = "/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody Plot nP) {
-        log.info("Requested to add new plot.");
-        if ((nP != null) && helper.getList(prop.getCropTypes()).contains(nP.getCropType())) {
-            Integer a = plotService.addPlot(nP);
-            log.info("Added result: {}", a);
-        } else
-            log.info("Use one of the crop type(food,cash,drug).");
+    	 log.info("Requested to add new plot.");
+    	    if ((nP != null) && helper.getList(prop.getCropTypes()).contains(nP.getCropType())) {
+    	        var result = plotService.addPlot(nP);
+    	        log.info("Added result: {}", result);
+    	    } else {
+    	        log.info("Use one of the crop types(food,cash,drug).");
+    	    }
     }
     
     @GetMapping("/get/{id}")
 	public ResponseEntity<Plot> get(@PathVariable(value = "id") Long plotId)
 			 {
-    	Plot plot = plotService.findById(plotId);
+    	var plot = plotService.findById(plotId);
 		return ResponseEntity.ok().body(plot);
 	}
 
@@ -61,7 +62,7 @@ public class PlotController {
     @ResponseStatus(HttpStatus.OK)
     public void config(@PathVariable("pNo") String pNo, @PathVariable("hasSensor") String hasSensor) {
         log.info("Requested to config the plot on sensor field.");
-        Integer c = plotService.configPlot(pNo, hasSensor);
+        var c = plotService.configPlot(pNo, hasSensor);
         log.info("Configured result: {}", c);
     }
 
@@ -70,7 +71,7 @@ public class PlotController {
     public void update(@RequestBody Plot uP) {
         log.info("Requested to update the plot.");
         //Update the plot from uP by no
-        Integer u = plotService.updatePlot(uP);
+        var u = plotService.updatePlot(uP);
         log.info("Updated result: {}", u);
     }
 

@@ -20,20 +20,5 @@ public class Properties {
 
     @Value("${alert.file}")
     private String alertFile;
-
-    public String getCropTypes() {
-        return cropTypes;
-    }
-
-    public String getIrrFile() {
-        return irrFile;
-    }
-
-    public String getRetryExceed() {
-        return retryExceed;
-    }
-
-    public String getAlertFile() {
-        return alertFile;
-    }
+    
 }

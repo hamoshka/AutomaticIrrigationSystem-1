@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PlotService {
 
-  private baseUrl = 'http://localhost:8080/irrigation/plots';
+  private baseUrl = 'http://localhost:8080/irrigation/api/plots';
 
   constructor(private http: HttpClient) { }
  

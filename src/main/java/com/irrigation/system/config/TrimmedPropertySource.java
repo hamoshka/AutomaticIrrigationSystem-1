@@ -18,6 +18,7 @@ public class TrimmedPropertySource extends MapPropertySource {
         }
         return value;
     }
+    
  
 }
 
