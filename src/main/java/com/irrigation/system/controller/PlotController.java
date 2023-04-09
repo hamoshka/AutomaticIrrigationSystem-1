@@ -1,25 +1,33 @@
 package com.irrigation.system.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.irrigation.system.config.Properties;
 import com.irrigation.system.model.Plot;
 import com.irrigation.system.service.plot.IPlotService;
 import com.irrigation.system.util.Helper;
 
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/plots")
+@Slf4j
 public class PlotController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PlotController.class);
 
     @Autowired
     private Properties prop;
@@ -34,12 +42,12 @@ public class PlotController {
     @PostMapping(value = "/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody Plot nP) {
-        LOG.info("Requested to add new plot.");
+        log.info("Requested to add new plot.");
         if ((nP != null) && helper.getList(prop.getCropTypes()).contains(nP.getCropType())) {
             Integer a = plotService.addPlot(nP);
-            LOG.info("Added result: {}", a);
+            log.info("Added result: {}", a);
         } else
-            LOG.info("Use one of the crop type(food,cash,drug).");
+            log.info("Use one of the crop type(food,cash,drug).");
     }
     
     @GetMapping("/get/{id}")
@@ -52,24 +60,24 @@ public class PlotController {
     @PatchMapping(value = "/config/{pNo}/{hasSensor}")
     @ResponseStatus(HttpStatus.OK)
     public void config(@PathVariable("pNo") String pNo, @PathVariable("hasSensor") String hasSensor) {
-        LOG.info("Requested to config the plot on sensor field.");
+        log.info("Requested to config the plot on sensor field.");
         Integer c = plotService.configPlot(pNo, hasSensor);
-        LOG.info("Configured result: {}", c);
+        log.info("Configured result: {}", c);
     }
 
     @PostMapping(value = "/update")
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody Plot uP) {
-        LOG.info("Requested to update the plot.");
+        log.info("Requested to update the plot.");
         //Update the plot from uP by no
         Integer u = plotService.updatePlot(uP);
-        LOG.info("Updated result: {}", u);
+        log.info("Updated result: {}", u);
     }
 
     @GetMapping(value = "/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Plot> getPlots() {
-        LOG.info("Requested to get all plot.");
+        log.info("Requested to get all plot.");
         return plotService.getPlots();
     }
 }

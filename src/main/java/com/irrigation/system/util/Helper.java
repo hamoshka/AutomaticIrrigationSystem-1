@@ -1,11 +1,5 @@
 package com.irrigation.system.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import com.irrigation.system.model.Plot;
-
 import static com.irrigation.system.util.Constant.SPLITTER_COMMA;
 
 import java.io.File;
@@ -14,10 +8,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+import com.irrigation.system.model.Plot;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class Helper {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Helper.class);
 
     public List<String> getList(String s){
         List<String> res = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Helper {
             try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
                 pw.write(fileHeader);
                 pw.write(getValue(aP));
-                LOG.info("{} report generated: {}", fileType, csvOutputFile);
+                log.info("{} report generated: {}", fileType, csvOutputFile);
             }
             catch (Exception e){
                 //

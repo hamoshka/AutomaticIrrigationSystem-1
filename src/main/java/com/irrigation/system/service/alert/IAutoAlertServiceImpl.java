@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.irrigation.system.model.Plot;
 import com.irrigation.system.repository.PlotRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Transactional
+@Slf4j
 public class IAutoAlertServiceImpl implements IAutoAlertService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(IAutoAlertServiceImpl.class);
 
     @Autowired
     private PlotRepository plotRepository;
@@ -24,13 +26,13 @@ public class IAutoAlertServiceImpl implements IAutoAlertService {
     public List<Plot> checkPlotsForAutoAlerting(Integer retryMax) {
         //Call for filtering plots for automatic alerting for non sensor and retry exceed.
     	List<Plot> alertP = plotRepository.findByHasSensorAndRetryCountGreaterThan("NO", 1);
-    	LOG.info("Total plot to check for alert: {}", alertP.size());
+    	log.info("Total plot to check for alert: {}", alertP.size());
 
     	List<Plot> aP = alertP.stream()
     	        .filter(p -> p.getRetryCount() > retryMax)
     	        .collect(Collectors.toList());
 
-    	LOG.info("Alert retry max: {}, plot count: {}", retryMax, aP.size());
+    	log.info("Alert retry max: {}, plot count: {}", retryMax, aP.size());
     	return aP.isEmpty() ? new ArrayList<>() : aP;
 
     }
