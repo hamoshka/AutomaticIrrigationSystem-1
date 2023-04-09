@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ["./plot-list.component.css"]
 })
 export class PlotListComponent implements OnInit {
-  plots: Observable<Plot[]>;
+  plots: Observable<Plot[]> | undefined;
 
   constructor(private plotService: PlotService,
     private router: Router) {}

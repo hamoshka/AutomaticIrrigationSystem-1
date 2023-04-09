@@ -11,8 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PlotDetailsComponent implements OnInit {
 
-  id: number;
-  plot: Plot;
+  id: number=0 ;
+  plot: Plot = new Plot;
 
   constructor(private route: ActivatedRoute,private router: Router,
     private plotService: PlotService) { }

@@ -10,8 +10,8 @@ import { PlotService } from '../plot.service';
 })
 export class UpdatePlotComponent implements OnInit {
 
-  id: number;
-  plot: Plot;
+  id: number=0;
+  plot: Plot = new Plot;
 
   constructor(private route: ActivatedRoute,private router: Router,
     private plotService: PlotService) { }
