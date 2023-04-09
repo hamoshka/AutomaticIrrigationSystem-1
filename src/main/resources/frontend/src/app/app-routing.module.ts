@@ -6,11 +6,12 @@ import { PlotListComponent } from './plot-list/plot-list.component';
 import { UpdatePlotComponent } from './update-plot/update-plot.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'plot', pathMatch: 'full' },
+  { path: '', redirectTo: 'plots', pathMatch: 'full' },
   { path: 'plots', component: PlotListComponent },
   { path: 'add', component: CreatePlotComponent },
   { path: 'update/:id', component: UpdatePlotComponent },
   { path: 'details/:id', component: PlotDetailsComponent },
+  { path: '**', component: PlotListComponent }
 ];
 
 @NgModule({

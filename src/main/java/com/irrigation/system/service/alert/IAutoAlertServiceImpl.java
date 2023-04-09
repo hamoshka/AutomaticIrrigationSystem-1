@@ -1,20 +1,16 @@
 package com.irrigation.system.service.alert;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.irrigation.system.model.Plot;
 import com.irrigation.system.repository.PlotRepository;
-import com.irrigation.system.util.Constant;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class IAutoAlertServiceImpl implements IAutoAlertService {

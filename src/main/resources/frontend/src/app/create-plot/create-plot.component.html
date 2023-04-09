@@ -3,43 +3,59 @@
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Plot NO</label>
-      <input type="text" class="form-control" id="plot-no" required [(ngModel)]="plot.no" name="no">
+      <input type="text" class="form-control" id="plot-no" required [(ngModel)]="plot.no" name="no" pattern="[0-9]+" >
     </div>
 
     <div class="form-group">
-      <label for="name">Has Sensor</label>
-      <input type="text" class="form-control" id="hasSensor" required [(ngModel)]="plot.hasSensor" name="hasSensor">
-    </div>
+  <label for="hasSensor">Has Sensor</label>
+  <select class="form-control" id="hasSensor" required [(ngModel)]="plot.hasSensor" name="hasSensor">
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+</div>
 
     <div class="form-group">
-      <label for="name">Retry Count</label>
-      <input type="text" class="form-control" id="retryCount" required [(ngModel)]="plot.retryCount" name="retryCount">
-    </div>
+  <label for="name">Retry Count</label>
+  <input type="text" class="form-control" id="retryCount" required [(ngModel)]="plot.retryCount" name="retryCount" (input)="plot.retryCount" pattern="[0-9]+" >
+</div>
+
 
     <div class="form-group">
-      <label for="name">Time Slot</label>
-      <input type="text" class="form-control" id="timeSlot" required [(ngModel)]="plot.timeSlot" name="timeSlot">
-    </div>
+  <label for="name">Time Slot (yyyy-MM-dd HH:mm)</label>
+  <input type="text" class="form-control" id="timeSlot" required [(ngModel)]="plot.timeSlot" name="timeSlot" 
+  pattern="^(19|20)\\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$">
+</div>
+
+  <div class="form-group">
+  <label for="name">Is Irrigated</label>
+  <select class="form-control" id="isIrrigated" required [(ngModel)]="plot.isIrrigated" name="isIrrigated">
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+</div>
+
 
     <div class="form-group">
-      <label for="name">Is Irrigated</label>
-      <input type="text" class="form-control" id="isIrrigated" required [(ngModel)]="plot.isIrrigated" name="isIrrigated">
-    </div>
+    <label for="name">Water Qty</label>
+    <input type="text" class="form-control" id="waterQty" required [(ngModel)]="plot.waterQty" name="waterQty" pattern="[0-9]+">
+</div>
 
-    <div class="form-group">
-      <label for="name">Water Qty</label>
-      <input type="text" class="form-control" id="waterQty" required [(ngModel)]="plot.waterQty" name="waterQty">
-    </div>
 
-    <div class="form-group">
-      <label for="name">Crop Type</label>
-      <input type="text" class="form-control" id="cropType" required [(ngModel)]="plot.cropType" name="cropType">
-    </div>
+  <div class="form-group">
+  <label for="cropType">Crop Type</label>
+  <select class="form-control" id="cropType" required [(ngModel)]="plot.cropType" name="cropType">
+    <option value="food">Food</option>
+    <option value="cash">Cash</option>
+    <option value="drug">Drug</option>
+  </select>
+</div>
 
-    <div class="form-group">
-      <label for="name">Cultivated Area</label>
-      <input type="text" class="form-control" id="cultivatedArea" required [(ngModel)]="plot.cultivatedArea" name="cultivatedArea">
-    </div>
+
+  <div class="form-group">
+  <label for="name">Cultivated Area</label>
+  <input type="text" class="form-control" id="cultivatedArea" required [(ngModel)]="plot.cultivatedArea" name="cultivatedArea" pattern="[0-9]+">
+</div>
+
 
 
     <button type="submit" class="btn btn-success">Submit</button>
