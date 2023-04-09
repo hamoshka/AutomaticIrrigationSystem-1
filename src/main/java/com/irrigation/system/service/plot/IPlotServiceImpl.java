@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,30 +41,15 @@ public class IPlotServiceImpl implements IPlotService {
     public Integer configPlot(String pN, String pS) {
         //Configuring the plot on sensor field.
         LOG.info("Configure the plot no: {}", pN);
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("has_sensor", pS);
-        parameters.put("no", pN);
-
-		/*
-		 * return jdbcIrr.update(Constant.SQL_CONFIG_PLOT, parameters);
-		 */
-    return  null;
+    return  plotRepository.updateHasSensorByNo(pS, pN);
     }
 
     @Override
     public Integer updatePlot(Plot uP) {
         //Updating the plot.
         LOG.info("Update the plot id: {}", uP.getId());
-      
-        Object[] parameters = {uP.getNo(),uP.getHasSensor(),uP.getTimeSlot(),uP.getIsIrrigated(), uP.getWaterQty(),
-        		uP.getCropType(), uP.getCultivatedArea(),uP.getId()};
-        int[] types = {Types.VARCHAR,Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.NUMERIC,Types.VARCHAR,Types.NUMERIC,Types.NUMERIC};
-      
-		/*
-		 * return jdbcIrr.update(Constant.SQL_UPDATE_PLOT, parameters,types);
-		 */
-        
-        return null;
+         Plot updatedPlot = plotRepository.save(uP);
+        return updatedPlot.getId().intValue();
     }
 
     @Override
@@ -75,17 +61,11 @@ public class IPlotServiceImpl implements IPlotService {
 
     }
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public Plot findById(Long plotId) {
-		/*
-		 * return jdbcIrr.queryForObject("SELECT * FROM plot WHERE id = ?", new
-		 * Object[]{plotId}, (rs, rowNum) -> new Plot( rs.getLong("id"),
-		 * rs.getString("no"), rs.getString("has_sensor"),
-		 * rs.getInt("SENSOR_RETRY_COUNT"), rs.getDate("TIME_SLOT"),
-		 * rs.getString("IS_IRRIGATED"), rs.getInt("WATER_QUANTITY"),
-		 * rs.getString("CROP_TYPE"), rs.getInt("CULTIVATED_AREA") ));
-		 */
-		return null;
+
+		Optional<Plot> plot = plotRepository.findById(plotId);
+		return plot.orElse(null);
+
 	}
 }

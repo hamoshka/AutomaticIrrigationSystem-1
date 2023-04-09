@@ -27,14 +27,15 @@ public class IAutoAlertServiceImpl implements IAutoAlertService {
     @Override
     public List<Plot> checkPlotsForAutoAlerting(Integer retryMax) {
         //Call for filtering plots for automatic alerting for non sensor and retry exceed.
-		/*
-		 * List<Plot> alertP = plotRepository.query( Constant.SQL_PLOT_AUTO_ALERT);
-		 * LOG.info("Total plot to check for alert: {}", alertP.size()); List<Plot> aP =
-		 * alertP.stream().filter(p -> p.getRetryCount() >
-		 * retryMax).collect(Collectors.toList());
-		 * LOG.info("Alert retry max: {}, plot count: {}", retryMax, aP.size()); return
-		 * aP.isEmpty() ? new ArrayList<>() : aP;
-		 */
-    	return null;
+    	List<Plot> alertP = plotRepository.findByHasSensorAndRetryCountGreaterThan("N", 1);
+    	LOG.info("Total plot to check for alert: {}", alertP.size());
+
+    	List<Plot> aP = alertP.stream()
+    	        .filter(p -> p.getRetryCount() > retryMax)
+    	        .collect(Collectors.toList());
+
+    	LOG.info("Alert retry max: {}, plot count: {}", retryMax, aP.size());
+    	return aP.isEmpty() ? new ArrayList<>() : aP;
+
     }
 }
