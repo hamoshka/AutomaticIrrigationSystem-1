@@ -15,17 +15,17 @@ retry:
 
 spring:
   jpa:
-    database-platform: org.hibernate.dialect.Oracle12cDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
     hibernate:
       ddl-auto: create
   datasource:
     ucp:
-      connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
-    url: jdbc:oracle:thin:@localhost:1521/xe
-    db_url: jdbc:oracle:thin:@localhost:1521/xe
-    username: EMKC0251
-    password: system
+      connection-factory-class-name: org.apache.tomcat.jdbc.pool.DataSource
+    url: jdbc:h2:mem:testdb
+    db_url: jdbc:h2:mem:testdb
+    username: sa
+    password: 
    
     
     
