@@ -17,8 +17,8 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.Oracle12cDialect
     show-sql: true
-#    hibernate:
-#      ddl-auto: create
+    hibernate:
+      ddl-auto: create
   datasource:
     ucp:
       connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
