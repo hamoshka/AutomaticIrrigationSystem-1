@@ -7,7 +7,9 @@ This is a project for managing an irrigation system. It is built using Spring Bo
 # Requirements
 * Java 11 or higher
 * Node.js 12 or higher
-* Angular CLI
+* Angular CLI 15 or higher
+* H2 Database
+
 
 # Getting Started
 To install the angular packages, navigate to src/main/resources/frontend:
@@ -27,6 +29,20 @@ To start the backend server, navigate to the root directory and run:
 <pre><code>
 ./mvnw spring-boot:run
 </code></pre> 
+
+
+# Alert System
+AutoIrrigationAlertScheduler class is Scheduler runs every 30 seconds and can be configured from application.yml
+
+# Reports
+please check application.yml
+
+* D://Report//alert-plot.csv
+* D://Report//auto-irrigation-plot.csv
+
+# Logging
+please check application.yml
+* D://Report//AutoIrrigation-App.log
 
 # Usage
 Once the server is running, you can access the application at http://localhost:8080/irrigation/index.html
