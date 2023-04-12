@@ -44,6 +44,10 @@ please check application.yml
 please check application.yml
 * D://Report//AutoIrrigation-App.log
 
+# Database 
+the sql script for creating the tables is under:
+src/main/resources/db/ddl.sql
+
 # Usage
 Once the server is running, you can access the application at http://localhost:8080/irrigation/index.html
 
